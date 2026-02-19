@@ -8,7 +8,7 @@ class Ingredient(models.Model):
         return '{}'.format(self.name)
     
     def get_absolute_url(self):
-        return reverse('ingredient-detail', args=[str(self.name)])
+        return reverse('ledger:recipe_list')
 
 class Recipe(models.Model):
     name = models.CharField(max_length=100)
@@ -18,7 +18,7 @@ class Recipe(models.Model):
         return '{}'.format(self.name)
     
     def get_absolute_url(self):
-        return reverse('recipe-detail', args=[str(self.name)])
+        return reverse('ledger:recipe_detail', args=[str(self.id)])
 
 class RecipeIngredient(models.Model):
     quantity = models.FloatField()

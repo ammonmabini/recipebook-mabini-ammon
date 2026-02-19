@@ -1,12 +1,15 @@
-{% extends 'ledger/base_ledger.html' %}
-{% load static %}
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>Recipe Book</h1>
+{% endblock %}
 
 {% block content %}
 
     <ul>
     {% for recipe in recipes %}
         <li>
-            <a href="{{ recipe.link }}">{{ recipe.name }}</a>
+            <a href="{{ recipe.get_absolute_url }}">{{ recipe.name }}</a>
         </li>
     {% endfor %}
     </ul>
