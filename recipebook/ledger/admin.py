@@ -6,9 +6,9 @@ class RecipeIngredientInline(admin.TabularInline):
 
 class RecipeAdmin(admin.ModelAdmin):
     model = Recipe
-    search_fields = ('name', )
-    list_display = ('name', )
-    list_filter = ('name', )
+    search_fields = ('name',)
+    list_display = ('name',)
+    list_filter = ('name',)
     fieldsets = [
         ('Details', {
             'fields': [
