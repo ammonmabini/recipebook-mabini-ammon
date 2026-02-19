@@ -1,84 +1,30 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Recipe
+from django.views.generic import DetailView
+from django.views.generic.list import ListView
 
 
 def index(request):
     return HttpResponse('Welcome to my recipe book!')
 
 
-recipes = [
-    {
-        "name": "Recipe 1",
-        "ingredients": [
-            {
-                "name": "tomato",
-                "quantity": "3pcs"
-            },
-            {
-                "name": "onion",
-                "quantity": "1pc"
-            },
-            {
-                "name": "pork",
-                "quantity": "1kg"
-            },
-            {
-                "name": "water",
-                "quantity": "1L"
-            },
-            {
-                "name": "sinigang mix",
-                "quantity": "1 packet"
-            }
-        ],
-        "link": "/recipe/1"
-    },
-    {
-        "name": "Recipe 2",
-        "ingredients": [
-            {
-                "name": "garlic",
-                "quantity": "1 head"
-            },
-            {
-                "name": "onion",
-                "quantity": "1pc"
-            },
-            {
-                "name": "vinegar",
-                "quantity": "1/2cup"
-            },
-            {
-                "name": "water",
-                "quantity": "1 cup"
-            },
-            {
-                "name": "salt",
-                "quantity": "1 tablespoon"
-            },
-            {
-                "name": "whole black peppers",
-                "quantity": "1 tablespoon"
-            },
-            {
-                "name": "pork",
-                "quantity": "1 kilo"
-            }
-        ],
-        "link": "/recipe/2"
-    }
-]
-
+recipes = []
 
 def recipe_list(request):
-    ctx = {
-        "recipes": recipes,
-    }   
-    return render(request, 'ledger/recipe_list.html', ctx)
-
+    recipes = Recipe.objects.all() #fetches all tasks from database
+    return render(request, 'ledger/recipe_list.html', {"recipes": recipes})
 
 def recipe_detail(request, recipe_id):
     recipe = next((item for item in recipes 
                    if item["link"] == f"/recipe/{recipe_id}"), None)
     
     return render(request, 'ledger/recipe_detail.html', {"recipe": recipe})
+
+class RecipeListView(ListView):
+    model = Recipe
+    template_name = 'ledger/recipe_list.html'
+
+class RecipeDetailView(DetailView):
+    model = Recipe
+    template_name = 'ledger/recipe_detail.html'
