@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
-{% block header %}
-    <h1>Recipe Book</h1>
-{% endblock %}
+{% block title %} Recipe Book | {{ recipe.name }} {% endblock %}
+{% block header %} <h3> Recipe Book | {{recipe.name}} </h3> {% endblock %}
 
 {% block content %}
     <h2>{{ recipe.name }}</h2>
@@ -11,4 +10,6 @@
         <li>{{ ingredient.quantity }} - {{ ingredient.ingredient.name }}</li>
         {% endfor %}
     </ul>
+    <h2> Made by: {{ recipe.author.user.username }}, Created on {{ recipe.created_on|date:"Y-m-d" }}, Updated last {{ recipe.updated_on|date:"Y-m-d" }}</h2>
+    <a href = "{% url 'ledger:recipe_list' %}"> Return to Recipe List </a>
 {% endblock %}
