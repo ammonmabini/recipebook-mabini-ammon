@@ -24,11 +24,7 @@ def recipe_detail(request, pk):
 class RecipeListView(ListView):
     model = Recipe
     template_name = 'ledger/recipe_list.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['recipe_list'] = Recipe.objects.filter(author__user=self.request.user)
-        return context
+    context_object_name = 'recipes'
 
 class RecipeDetailView(LoginRequiredMixin, DetailView):
     model = Recipe

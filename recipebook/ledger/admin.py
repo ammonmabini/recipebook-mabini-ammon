@@ -21,10 +21,14 @@ class RecipeAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     list_display = ('name',)
     list_filter = ('name',)
+    readonly_fields = ('created_on', 'updated_on')
     fieldsets = [
         ('Details',{
             'fields': [
-                ('name', 'created_on', 'updated_on'), 'author'
+                'name',
+                'author',
+                'created_on',
+                'updated_on',
         ]
         }),
     ]
