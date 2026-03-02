@@ -37,7 +37,7 @@ class Ingredient(models.Model):
         return '{}'.format(self.name)
 
     def get_absolute_url(self):
-        return reverse('ledger:recipe_detail', kwargs={'pk': self.pk})
+        return reverse('ledger:ingredient_detail', kwargs={'pk': self.pk})
 
 
 class RecipeIngredient(models.Model):
