@@ -55,7 +55,9 @@ class RecipeAddView(LoginRequiredMixin, CreateView):
     fields = ['name', ]
 
     def form_valid(self, form):
-        form.instance.author = get_object_or_404(Profile, user=self.request.user)
+        form.instance.author = get_object_or_404(
+            Profile, user=self.request.user
+        )
         return super().form_valid(form)
 
 
@@ -69,9 +71,14 @@ class RecipeAddImageView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('ledger:recipe_detail', kwargs={'pk': self.object.recipe.pk})
+        return reverse_lazy(
+            'ledger:recipe_detail',
+            kwargs={'pk': self.object.recipe.pk}
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['recipe'] = get_object_or_404(Recipe, pk=self.kwargs['pk'])
+        context['recipe'] = get_object_or_404(
+            Recipe, pk=self.kwargs['pk']
+        )
         return context
