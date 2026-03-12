@@ -32,9 +32,12 @@ class RecipeAdmin(admin.ModelAdmin):
         ("Details", {
             'fields': [
                 'name',
+                'ingredients',
+                'quantity',
                 'author',
                 'created_on',
                 'updated_on',
+                'recipe_image',
             ]
         }),
     ]

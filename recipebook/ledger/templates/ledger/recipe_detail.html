@@ -12,6 +12,14 @@
     </ul>
     <h4> Made by: {{ recipe.author.user.username }} </h4>
     <h4> Created on {{ recipe.created_on|date:"Y-m-d" }} </h4>
-    <h4> Updated last {{ recipe.updated_on|date:"Y-m-d" }} </h4>   
-    <a href = "{% url 'ledger:recipe_list' %}"> Return to Recipe List </a>
+    <h4> Updated last {{ recipe.updated_on|date:"Y-m-d" }} </h4>
+
+    {% for img in recipe.image.all %}
+        <img src="{{ img.image.url }}" alt="{{ img.description }}" />
+    {% endfor %}
+    <br>
+    <a href="{% url 'ledger:recipe_add_image' recipe.pk %}">Add Image</a>
+    <br>
+    <br>
+    <a href="{% url 'ledger:recipe_list' %}"> Return to Recipe List </a>
 {% endblock %}
